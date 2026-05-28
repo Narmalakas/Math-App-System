@@ -26,33 +26,31 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> registerUser() async {
-  var url = Uri.parse("${ApiConfig.baseUrl}/register.php");
+    var url = Uri.parse("${ApiConfig.baseUrl}/register.php");
 
-  var response = await http.post(url, body: {
-    "username": _usernameController.text,
-    "password": _passwordController.text,
-    "class_name": _classNameController.text,
-  });
+    var response = await http.post(url, body: {
+      "username": _usernameController.text,
+      "password": _passwordController.text,
+      "class_name": _classNameController.text,
+    });
 
-  var data = json.decode(response.body);
+    var data = json.decode(response.body);
 
-  if (data["status"] == "success") {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Registered successfully")),
-    );
+    if (data["status"] == "success") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Registered successfully")),
+      );
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(data["message"] ?? "Registration failed")),
-    );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Registration failed")),
+      );
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {

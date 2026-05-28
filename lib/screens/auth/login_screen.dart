@@ -24,28 +24,42 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> loginUser() async {
-  var url = Uri.parse("${ApiConfig.baseUrl}/login.php");
+ Future<void> loginUser() async {
+  try {
+    var url = Uri.parse("${ApiConfig.baseUrl}/login.php");
 
-  var response = await http.post(url, body: {
-    "username": _usernameController.text,
-    "password": _passwordController.text,
-  });
+    var response = await http.post(url, body: {
+      "username": _usernameController.text,
+      "password": _passwordController.text,
+    });
 
-  var data = json.decode(response.body);
+    print(response.body);
 
-  if (data["status"] == "success") {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomepageScreen(
-          username: _usernameController.text,
+    var data = json.decode(response.body);
+
+    if (data["status"] == "success") {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomepageScreen(
+            username: _usernameController.text,
+          ),
         ),
-      ),
-    );
-  } else {
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(data["message"] ?? "Invalid login"),
+        ),
+      );
+    }
+  } catch (e) {
+    print(e);
+
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Invalid login")),
+      SnackBar(
+        content: Text("Connection Error: $e"),
+      ),
     );
   }
 }

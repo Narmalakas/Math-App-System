@@ -4,6 +4,7 @@ import '../quarters/quarter2_games/quarter2_screen.dart';
 import '../quarters/quarter3_games/quarter3_screen.dart';
 import '../quarters/quarter4_games/quarter4_screen.dart';
 
+
 import 'stats_screen.dart';
 import 'profile_screen.dart';
 import 'shop_screen.dart';
@@ -77,7 +78,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ProfileScreen(),
+                           builder: (context) => ProfileScreen(
+                              username: username,
+                            ),
                           ),
                         );
                       },
@@ -119,7 +122,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ShopScreen(),
+                           builder: (context) => ShopScreen(
+                            username: username,
+                          ),
                           ),
                         );
                       },
@@ -259,7 +264,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Quarter1Screen(),
+                            builder: (context) => Quarter1Screen(
+                                username: username,
+                              ),
                           ),
                         );
                       },
@@ -271,7 +278,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Quarter2Screen(),
+                            builder: (context) => Quarter2Screen(
+                              username: username,
+                            ),
                           ),
                         );
                       },
@@ -283,7 +292,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Quarter3Screen(),
+                            builder: (context) => Quarter3Screen(
+                              username: username,
+                            ),
                           ),
                         );
                       },
@@ -295,7 +306,9 @@ class HomepageScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Quarter4Screen(),
+                            builder: (context) => Quarter4Screen(
+                              username: username,
+                            ),
                           ),
                         );
                       },
